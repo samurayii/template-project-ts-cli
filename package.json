@@ -16,7 +16,7 @@
         "build": "rimraf ./dist && npm run lint && tsc && json-key-remover && files-copier -e build",
         "lint": "eslint \"./src/**/*.{js,ts}\" --quiet --fix && tsc --noEmit",
         "start:dev": "ts-node ./src/index.ts",
-        "install:local": "npm run build && npm install ./dist -g
+        "install:local": "npm run build && npm install ./dist -g"
     },
     "repository": {
         "type": "git",
