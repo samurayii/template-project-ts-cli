@@ -1,25 +1,30 @@
 #!/usr/bin/env node
 import config from "./lib/entry";
-import { ILogger, Logger } from "logger-flx";
+import { FastifySmallLogger, IFastifySmallLoggerConfig } from "fastify-small-logger";
 
 console.log(config);
 
-let logger: ILogger;
+const logger_options: IFastifySmallLoggerConfig = {
+    name: "",
+    levels: [],
+    bindings: {},
+    output: {
+        timestamp: "none",
+        bindings: "none",
+        levels: ["fatal","info","error","warn", "debug", "trace"]
+    }
+};
 
-if (config.logs === "none") {
-    logger = new Logger({
-        mode: "prod",
-        type: true,
-        timestamp: "none",
-        enable: false
-    });
-} else {
-    logger = new Logger({
-        mode: config.logs,
-        type: true,
-        timestamp: "none",
-        enable: true
-    });
+if (config.logs === "prod") {
+    logger_options.levels = ["fatal","info","error","warn"];
+}
+if (config.logs === "dev") {
+    logger_options.levels = ["fatal","info","error","warn", "debug"];
+}
+if (config.logs === "debug") {
+    logger_options.levels = ["fatal","info","error","warn", "debug", "trace"];
 }
 
-logger.log("start");
+const logger = new FastifySmallLogger(logger_options);
+
+logger.info("start");

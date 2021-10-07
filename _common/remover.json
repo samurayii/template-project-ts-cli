@@ -1,0 +1,10 @@
+{
+    "target": "./package.json",
+    "destination": "./dist/package.json",
+    "remove": [
+        "remover",
+        "devDependencies",
+        "scripts",
+        "copier"
+    ]
+}

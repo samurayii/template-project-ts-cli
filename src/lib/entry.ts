@@ -34,13 +34,13 @@ const program = new Command();
 const pkg = findPkg();
 
 if (pkg === undefined) {
-    console.error(chalk.red("[ERROR] package.json not found"));
+    console.error(`${chalk.bgRed(" FATAL ")} package.json not found`);
     process.exit(1);
 }
 
 program.version(`${pkg.name} version: ${pkg.version}`, "-v, --version", "output the current version.");
 program.name(<string>pkg.name);
-program.option("-l, --logs <type>", "Logs details, can be none, none, prod, dev or debug (Environment variable: TEMPLATE_LOGS=<type>). Example: --logs prod", "prod");
+program.option("-l, --logs <type>", "Logs details. Modes: none, prod, dev or debug (Environment variable: TEMPLATE_LOGS=<type>). Example: --logs prod", "prod");
 
 
 
