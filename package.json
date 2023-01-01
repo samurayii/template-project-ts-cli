@@ -10,8 +10,8 @@
         "template-cli": "./index.js"
     },
     "scripts": {
-        "up": "ncu && ncu -u && rimraf ./package-lock.json && npm i",
-        "ncu": "ncu",
+        "up": "ncu --configFilePath ./_common --configFileName ncu_up_config.json && rimraf ./package-lock.json && npm i && ncu --configFilePath ./_common --configFileName ncu_config.json",
+        "ncu": "ncu --configFilePath ./_common --configFileName ncu_config.json",
         "pub": "npm run build && npm publish ./dist",
         "build": "rimraf ./dist && npm run lint && tsc && json-key-remover --config ./_common/remover.json && files-copier -e build",
         "lint": "eslint \"./src/**/*.{js,ts}\" --quiet --fix && tsc --noEmit",
@@ -36,21 +36,21 @@
     "homepage": "https://github.com/samurayii/template-project-ts-cli.git#readme",
     "devDependencies": {
         "@types/chalk": "^2.2.0",
-        "@types/node": "^16.10.3",
-        "@typescript-eslint/eslint-plugin": "^4.33.0",
-        "@typescript-eslint/parser": "^4.33.0",
-        "eslint": "^7.32.0",
+        "@types/node": "^18.11.18",
+        "@typescript-eslint/eslint-plugin": "^5.47.1",
+        "@typescript-eslint/parser": "^5.47.1",
+        "eslint": "^8.31.0",
         "files-copier": "^0.1.1",
         "json-key-remover": "^0.1.4",
-        "npm-check-updates": "^11.8.5",
+        "npm-check-updates": "^16.6.2",
         "rimraf": "^3.0.2",
-        "ts-node": "^10.2.1",
-        "typescript": "^4.4.3"
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.4"
     },
     "dependencies": {
         "chalk": "^4.1.2",
-        "commander": "^8.2.0",
-        "fastify-small-logger": "^1.7.9"
+        "commander": "^9.4.1",
+        "logger-event-emitter": "^0.2.3"
     },
     "copier": {
         "build": {

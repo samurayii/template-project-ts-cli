@@ -1,30 +1,26 @@
 #!/usr/bin/env node
 import config from "./lib/entry";
-import { FastifySmallLogger, IFastifySmallLoggerConfig } from "fastify-small-logger";
+import { LoggerEventEmitter, ILoggerEventEmitterConfig } from "logger-event-emitter";
 
 console.log(config);
 
-const logger_options: IFastifySmallLoggerConfig = {
+const logger_options: ILoggerEventEmitterConfig = {
     name: "",
-    levels: [],
-    bindings: {},
-    output: {
-        timestamp: "none",
-        bindings: "none",
-        levels: ["fatal","info","error","warn", "debug", "trace"]
-    }
+    enable: true,
+    level: "error",
+    timestamp: "none"
 };
 
 if (config.logs === "prod") {
-    logger_options.levels = ["fatal","info","error","warn"];
+    logger_options.level = "error";
 }
 if (config.logs === "dev") {
-    logger_options.levels = ["fatal","info","error","warn", "debug"];
+    logger_options.level = "debug";
 }
 if (config.logs === "debug") {
-    logger_options.levels = ["fatal","info","error","warn", "debug", "trace"];
+    logger_options.level = "trace";
 }
 
-const logger = new FastifySmallLogger(logger_options);
+const logger = new LoggerEventEmitter(logger_options);
 
 logger.info("start");
